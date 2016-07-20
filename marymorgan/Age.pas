@@ -1,4 +1,4 @@
-program Age;
+program Age(official);
 
 var
 Age_: integer;
@@ -8,24 +8,23 @@ begin
 writeln('Enter age: ');
 readln (age_);
 
-if age_<0 then
+if age_>=16 then
 	begin
-	writeln('in developing');	
-	end;
-
-if (age_>0) and (age_<16) then
+		if age_>=50 then 
+			writeln('old')
+		else
+		begin
+		writeln('young')
+		end;
+	end
+else 
 	begin
-	writeln('little');	
-	end;
-
-if (age_>15) and (age_<50) then
-	begin
-	writeln('young');	
-	end;
-
-if age_>49 then
-	begin
-	writeln('old');	
+		if age_>=0 then 
+		writeln('little')
+	else
+		begin
+		writeln('in developing')
+		end;
 	end;
 
 readln();
