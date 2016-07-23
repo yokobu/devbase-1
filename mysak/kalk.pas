@@ -21,8 +21,5 @@ end;
 else
  writeln('wrong nb');
 end;
-
-
-
 readln();
 end.
