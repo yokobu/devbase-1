@@ -15,7 +15,7 @@ write(2);
 write(3);
 writeln();
 writeln(4);writeln(5);writeln(6);
-writeln();
+writeln(23-07);
 writeln(1,'sometext',true,'%', 0.15:0:2);
 
 
