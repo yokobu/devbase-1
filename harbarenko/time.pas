@@ -1,28 +1,36 @@
-program time;
+program time1;
 var
-	A : Integer;
-	B : Integer;
+	hour : Integer;
+	minute : Integer;
 	label Home;
 		begin
 		Home:
 			writeln('Enter hour and minutes');
-		readln(A);
-		readln(B);
-		writeln(A,':',B);
-		if ((A < 0) or (A > 24)) or ((B < 0) or (B > 59)) then
+		readln(hour);
+		readln(minute);
+		writeln(hour,':',minute);
+		if (hour < 0) or (hour > 23) or (minute < 0) or (minute > 59) then
 			begin
 				writeln('Invalid time');
 				goto Home;
 			end;
-		if (B = 59) then
+		if (minute = 59) then
 			begin
-				A := A + 1;
-				B := 0;
-			end
+				if (hour = 23) then
+					begin
+						hour := 0;
+						minute := 0;
+					end
+				else
+					begin
+						hour := hour + 1;
+						minute := 0;
+					end
+			end		
 		else
 			begin
-					B := B + 1;
+					minute := minute + 1;
 			end;
-		writeln(A,':',B);
+		writeln(hour,':',minute);
 		readln();
 	end.

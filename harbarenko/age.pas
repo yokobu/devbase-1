@@ -14,5 +14,5 @@ var
 				writeln('You are adult');
 		if (A >50) and (A <= 120) then
 				writeln('Your are old');
-		readln();
+		readln()
 	end.
