@@ -7,7 +7,7 @@ Number: integer;
 
 begin
 	
-writeln('Enter number: ');
+writeln('Enter number:');
 readln (number);
 
 if (number mod 2)=0 then
