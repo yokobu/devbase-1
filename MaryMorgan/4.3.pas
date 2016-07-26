@@ -27,4 +27,3 @@ for a:= 1 to 20 do //цикл.
 
 readln();
 end.
-ll
