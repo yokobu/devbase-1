@@ -11,12 +11,8 @@ var
 				if i = 16 then
 					begin 
 						textcolor(i-14);
-						writeln(indent,i,' Alex, you the kindest man in the world. Your kindness warms even in winter');
-					end
-				else
-					begin
-						writeln(indent,i,' Alex, you the kindest man in the world. Your kindness warms even in winter');
 					end;
+			writeln(indent,i,' Alex, you the kindest man in the world. Your kindness warms even in winter');
 			indent := indent + ' ';
 			delay(1000);
 			end;
