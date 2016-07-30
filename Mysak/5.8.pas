@@ -2,7 +2,7 @@ program balishe_menishe2;
 uses crt;
 var  a,b,c:integer;            //                       
 begin
-a:=3;
+a:=random(1000);
 c:=0;
   repeat
   writeln('Enter number:');
