@@ -4,11 +4,9 @@ var
 	N : Integer;
 	a : Integer;
 	b : Integer;
-	c : Integer;
 	begin
 	Randomize;
 	a := random(1000) + 1;
-	c := 0;
 	repeat 
 	writeln('Enter number');
 		readln(N);
@@ -17,10 +15,18 @@ var
 			writeln('Error');
 			exit;
 		end;
+		if N = a then
+		break;
 		if N < a then
+		begin
 		b := a - N;
-		if N > a then
+		writeln('warmer');
+		end
+		else
+		begin
 		b := N - a;
+		writeln('colder');
+		end;
 		if (b >= 500) and (b <= 999) then
 		writeln('frozen');				
 		if (b >= 100) and (b <= 499) then
