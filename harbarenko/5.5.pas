@@ -8,16 +8,16 @@ var
 	a := random(100) + 1;
 	repeat 
 	writeln('Enter number');
-		readln(N);
-		if (N <= 0) or (N > 100) then
+	readln(N);
+	if (N <= 0) or (N > 100) then
 		begin
 			writeln('Error');
-			exit;
+		exit;
 		end;
-		if N < a then
+	if N < a then
 		writeln('>');
-		if N > a then
-		writeln('<')
+	if N > a then
+		writeln('<');
 	until N = a;
 	writeln('You win!');
 	readln();
