@@ -47,19 +47,24 @@ var
 			end;
 		writeln('Jay got ', sumJay, ' pokemons');
 		writeln('Bob got ', sumBob, ' pokemons');
+		if sumJay = sumBob then
+			begin
+				writeln('It is a tie.');
+				writeln('You lose the bet.');
+			end;
 		if sumJay > sumBob then
 			begin
 			writeln('Jay wins!');
 				if i = 1 then
 					begin
 					writeln('You win the bet.');
-				end
+					end
 				else
 					begin
 					writeln('You lose the bet.');
-				end;
-			end
-		else
+					end;
+			end;
+		if sumJay < sumBob then
 			begin
 			writeln('Bob wins!');
 				if i = 2 then
@@ -70,11 +75,6 @@ var
 					begin
 					writeln('You lose the bet.');
 					end;
-		if sumJay = sumBob then
-			begin
-				writeln('It is a tie.');
-				writeln('You lose the bet.');
 			end;
-		end;
 		readln();
 	end.
