@@ -2,9 +2,9 @@ program numbers;
 uses crt;
 var 
 	N : Integer;
-	a : Integer;
-	b : Integer;
-	c : Integer;
+	a : Longint;
+	b : Longint;
+	c : Longint;
 	count : Integer;
 	begin
 	count := 0;
@@ -12,18 +12,18 @@ var
 	b := 0;
 	c := 0;
 	writeln('Enter number');
-		readln(N);
-		if N <= 0 then
+	readln(N);
+	if N <= 0 then
 		begin
 			writeln('Error');
-			exit;
+		exit;
 		end;
 	repeat 
-		c := a + b;
-		a := b;
-		b := c;
-		count := count + 1;
-		writeln(c);
+	c := a + b;
+	a := b;
+	b := c;
+	count := count + 1;
+	writeln(c);
 	until count = N;
 	readln();
 end.
