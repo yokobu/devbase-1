@@ -30,7 +30,7 @@ var
 				end;
 		else
 				begin
-				writeln('Invalid data');
+				writeln('Invalid bet');
 				exit;
 				end
 		end;
