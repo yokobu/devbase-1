@@ -27,5 +27,12 @@ begin
 	textcolor(7,0);
 	readln();
 	clrscr;
-	readln;
+	
+	while not keypressed do
+	begin
+		writeln('lalala');
+		delay(500);		
+	end;
+
+	readkey();
 end.
