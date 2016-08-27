@@ -865,6 +865,7 @@ randomize;
 		a:=(random(10)+1);
 		if (a=1) or (a=2) or (a=3) or (a=4) then
 		begin
+		writeln('ВСЕ ХОРОШО');
 			if (palki>=1) then
 				stamina:=stamina-75	
 			else
