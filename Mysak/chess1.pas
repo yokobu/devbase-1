@@ -21,8 +21,10 @@ type
 	TField = array[1..8, 1..8] of TFigure;
 var
 	gm,gd:smallInt;
+	kontj,konti,fromj,fromi,toj,toi:integer;
 	
 	PlayField: TField;
+	//key:char;
 
 
 procedure zapol;
@@ -46,16 +48,16 @@ begin
 				PlayField[j,i].IsBlack:=false;
 			end;
 
-			if ((j=1) or (j=7)) and (i=1) then
+			if ((j=1) or (j=8)) and ((i=3) or (i=6)) then
 			begin
-				PlayField[j,i].figuretype:=FigureTypecastle;
+				PlayField[j,i].figuretype:=FigureTypebishop;
 				if (j=1) then
 				PlayField[j,i].IsBlack:=true
 				else
 				PlayField[j,i].IsBlack:=false;
 			end;
 
-			if ((j=1) or (j=7)) and (i=2) then
+			if ((j=1) or (j=8)) and ((i=2) or (i=7)) then
 			begin
 				PlayField[j,i].figuretype:=FigureTypeknight;
 				if (j=1) then
@@ -64,14 +66,33 @@ begin
 				PlayField[j,i].IsBlack:=false;
 			end;
 
-			if ((j=1) or (j=7)) and (i=3) then
+			if ((i=1) or (i=8)) and ((j=1)or (j=8)) then
 			begin
-				PlayField[j,i].figuretype:=FigureTypebishop;
+				PlayField[j,i].figuretype:=FigureTypecastle;
 				if (j=1) then
 				PlayField[j,i].IsBlack:=true
 				else
 				PlayField[j,i].IsBlack:=false;
 			end;
+
+			if ((j=1) or (j=8)) and (i=4) then
+			begin
+				PlayField[j,i].figuretype:=FigureTypeking;
+				if (j=1) then
+				PlayField[j,i].IsBlack:=true
+				else
+				PlayField[j,i].IsBlack:=false;
+			end;
+
+			if ((j=1) or (j=8)) and (i=5) then
+			begin
+				PlayField[j,i].figuretype:=FigureTypequeen;
+				if (j=1) then
+				PlayField[j,i].IsBlack:=true
+				else
+				PlayField[j,i].IsBlack:=false;
+			end;
+
 
 
 		end;
@@ -164,22 +185,76 @@ begin
 	bar(x,y,x-30,y-60);
 	x:=x-20;
 	y:=y-50;
-	bar(x+5,y,x+10,y+10);
+	bar(x,y,x+10,y+10);
 
 
 end;
-{procedure queen();
+procedure queen(row,col:integer ;color:boolean);
 	var
-		: Integer;
+		x,y: Integer;
 begin
-	
-end;}
-{procedure king();
+	y:=(row)*90;
+	x:=(col-1)*90;
+
+	if (color=true) then
+	setfillstyle(1,brown)
+	else
+	setfillstyle(1,yellow);
+
+	bar(x+10,y,x+80,y-10);
+	x:=x+60;
+	y:=y-10;
+	bar(x,y,x-30,y-50);
+	x:=x-20;
+	bar(x,y,x+10,y-10);
+	x:=x-10;
+	y:=y-10;
+	bar(x,y,x+30,y-20);
+
+
+
+
+end;
+procedure king(row,col:integer ;color:boolean);
+
+		var
+		x,y: Integer;
+begin
+	y:=(row)*90;
+	x:=(col-1)*90;
+
+	if (color=true) then
+	setfillstyle(1,brown)
+	else
+	setfillstyle(1,yellow);
+
+	bar(x+10,y,x+80,y-10);
+	x:=x+60;
+	y:=y-10;
+	bar(x,y,x-30,y-40);
+	x:=x-10;
+	y:=y-40;
+	bar(x,y,x+10,y-30);
+	x:=x-10;
+	y:=y-10;
+	bar(x,y,x+30,y+10);
+end;
+
+procedure riskont(i,j: integer; isRed: boolean);
 	var
-		: Integer;
+		x,y:integer;
 begin
+	y:=(j-1)*90;
+	x:=(i-1)*90;
 	
-end;}
+	if (isRed) then
+		setfillstyle(1,red)
+	else
+		setfillstyle(1,green);
+
+	bar(x,y,x+90,y+90);
+end;
+
 procedure desk();
 	var
 	 i,j,col1,col2,smena:byte;
@@ -211,13 +286,19 @@ begin
 				y:=y-90;
 			end;
 
+			if (konti = i) and (kontj = j) then
+				riskont(i,j,true);
+
+			if (fromi = i) and (fromj = j) then
+				riskont(i,j,false);
+
 			case PlayField[j,i].FigureType of
 				FigureTypePawn: pawn(j,i, PlayField[j,i].IsBlack);
-				FigureTypebishop:bishop(j,i,PlayField[i,j].IsBlack);
-		  		FigureTypeknight:knight(j,i,PlayField[i,j].IsBlack);
-		 		FigureTypecastle:castle(j,i,PlayField[i,j].IsBlack);
-				//FigureTypequeen:queen(i,j,PlayField[i,j].IsBlack);
-				//figureTypeking:king(i,j,PlayField[i,j].IsBlack);
+				FigureTypebishop:bishop(j,i,PlayField[j,i].IsBlack);
+		  		FigureTypeknight:knight(j,i,PlayField[j,i].IsBlack);
+		 		FigureTypecastle:castle(j,i,PlayField[j,i].IsBlack);
+				FigureTypequeen:queen(j,i,PlayField[j,i].IsBlack);
+				figureTypeking:king(j,i,PlayField[j,i].IsBlack);
 			end;
 		end;
 		y:=y+90;
@@ -226,28 +307,153 @@ begin
 		col1:=col2;
 		col2:=smena;
 	end;
+end;
 
-	
-	
+
+procedure redrawall();
+begin
+	desk();
 end;
 
 
 
+procedure kontur(firstface:boolean; noblack: boolean);
+	var key:char;
+begin
+
+	repeat
+	writeln(kontj,' ',konti);
+	 	key:=readkey;
+	 	case key of
+		 	'a':
+		 	begin
+		 		if (konti > 1) then
+		 			konti:= konti-1;	
+		 	end;
+
+		 	's':
+		 	begin
+		 		if (kontj <8)  then
+		 			kontj:= kontj+1;	
+		 	end;
+
+		 	'd':
+		 	begin
+		 		if (konti <8) then
+		 			konti:= konti+1;	
+		 	end;
+
+		 	'w':
+		 	begin
+		 		if (kontj > 1) then
+		 			kontj:= kontj-1;	
+		 	end;
+
+		 	'l':
+		 	begin
+		 		if (firstface=true) then
+		 		if ((playfield[kontj,konti].FigureType>0) and (noblack <> playfield[kontj,konti].IsBlack)) then
+		 		begin
+		 			break;
+		 		end;
+
+		 		if (firstface=false) then																								//logic
+		 		begin
+		 			case playfield[fromj,fromi].FigureType of
+		 				{FigureTypePawn:
+			 				Begin
+			 					if ((playfield[kontj,konti].IsBlack=true) and (fromj-kontj)>1)or ((playfield[kontj,konti].IsBlack=false) and (fromj-kontj)<-1) )   or (fromi<>konti)) then
+			 					continue;
+
+			 				end;}
+		 				figureTypeking: 
+		 					Begin
+			 					if (abs(fromj - kontj)>1) or (abs(fromi-konti)>1) then
+			 					Begin
+			 						continue;
+			 					end;
+		 					end;		 			
+		 			end;
+
+		 			if ((playfield[kontj,konti].FigureType=0) or (playfield[kontj,konti].IsBlack=noblack)) then
+		 				break;
+		 		end;
+	 		end;
+
+
+	 	end;
+
+	 	redrawall();
+	
+	 until false;
+end;
 
 Begin
 	 gm:=0;
 	 gd:=0;
-	 DetectGraph(Gm,Gd);
-	 InitGraph(gm,gd,'');
+	 DetectGraph(Gd,Gm);
+	 InitGraph(gd,gm,'');
 	 
 	 setbkcolor(colorPink);
 	 ClearDevice;
-	 
 	 zapol();
-	 desk();
 
 	 
-	
+	 //setActivePage();
+	 repeat
+	 writeln('turn white begin');
+	 konti:=1;
+	 kontj:=8;
+
+	 redrawall();
+
+	 
+	 kontur(true, true);
+	 fromi:=konti;
+	 fromj:=kontj;
+	 writeln('chosen: ', fromi, ' ', fromj);
+
+	 kontur(false, true);
+	 toi:=konti;
+	 toj:=kontj;
+	 writeln('chosen2: ', toi, ' ', toj);
+
+	 playfield[toj,toi]:=playfield[fromj,fromi];
+	 playfield[fromj,fromi].FigureType:=0;
+	 writeln('moved');
+	 fromi :=0;
+	 fromj :=0;
+
+
+	 writeln('turn black begin');
+	 konti:=1;
+	 kontj:=1;
+
+	 redrawall();
+	 
+	 kontur(true, false);
+	 fromi:=konti;
+	 fromj:=kontj;
+	 writeln('chosen: ', fromi, ' ', fromj);
+
+	 kontur(false,false);
+	 toi:=konti;
+	 toj:=kontj;
+	 writeln('chosen2: ', toi, ' ', toj);
+
+	 playfield[toj,toi]:=playfield[fromj,fromi];
+	 playfield[fromj,fromi].FigureType:=0;
+	 writeln('moved');
+	 fromi :=0;
+	 fromj :=0;
+
+	 until false;
+	 
+
+	 
+	 
+
+	//redrawall 
 
 	 readkey();
 
