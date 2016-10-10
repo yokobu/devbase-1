@@ -77,7 +77,7 @@ begin
 
 			if ((j=1) or (j=8)) and (i=4) then
 			begin
-				PlayField[j,i].figuretype:=FigureTypeking;
+				PlayField[j,i].figuretype:=FigureTypequeen;
 				if (j=1) then
 				PlayField[j,i].IsBlack:=true
 				else
@@ -86,7 +86,7 @@ begin
 
 			if ((j=1) or (j=8)) and (i=5) then
 			begin
-				PlayField[j,i].figuretype:=FigureTypequeen;
+				PlayField[j,i].figuretype:=FigureTypeking;
 				if (j=1) then
 				PlayField[j,i].IsBlack:=true
 				else
@@ -136,16 +136,13 @@ begin
 	setfillstyle(1,yellow);
 
 	bar(x+10,y,x+80,y-10);						//10,80 80,70
-	x:=x+70;
+	x:=x+60;
 	y:=y-10;							
-	bar(x,y,x-60,y-50);								//70,70  20,30
-	x:=x-60;
-	y:=y-50;
-	bar(x,y,x+10,y-10);						//20,30   30,20
-	x:=x+10;
-	bar(x,y,x+10,y-10);
-	x:=x+10;
-	bar(x,y,x+10,y-10);
+	bar(x,y,x-30,y-40);								//70,70  20,30
+	x:=x-10;
+	y:=y-40;
+	bar(x,y,x-10,y-10);						//20,30   30,20
+	
 end;
 procedure knight(row,col:integer ;color:boolean);    //конь	
 	var 
@@ -185,7 +182,10 @@ begin
 	bar(x,y,x-30,y-60);
 	x:=x-20;
 	y:=y-50;
-	bar(x,y,x+10,y+10);
+	bar(x,y,x-10,y-20);
+	x:=x+10;
+	bar(x,y,x+10,y-20);
+	
 
 
 end;
@@ -205,12 +205,10 @@ begin
 	x:=x+60;
 	y:=y-10;
 	bar(x,y,x-30,y-50);
-	x:=x-20;
-	bar(x,y,x+10,y-10);
-	x:=x-10;
-	y:=y-10;
-	bar(x,y,x+30,y-20);
-
+	x:=x-40;
+	y:=y-40;
+	bar(x,y,x+50,y-20);
+	bar(x+20,y,x+30,y-40)
 
 
 
@@ -234,10 +232,10 @@ begin
 	bar(x,y,x-30,y-40);
 	x:=x-10;
 	y:=y-40;
-	bar(x,y,x+10,y-30);
+	bar(x-10,y,x,y-30);
 	x:=x-10;
 	y:=y-10;
-	bar(x,y,x+30,y+10);
+	bar(x-10,y,x+20,y-10);
 end;
 
 procedure riskont(i,j: integer; isRed: boolean);
@@ -360,26 +358,53 @@ begin
 		 		if (firstface=false) then																								//logic
 		 		begin
 		 			case playfield[fromj,fromi].FigureType of
-		 				{FigureTypePawn:
+		 				FigureTypePawn:
 			 				Begin
-			 					if ((playfield[kontj,konti].IsBlack=true) and (fromj-kontj)>1)or ((playfield[kontj,konti].IsBlack=false) and (fromj-kontj)<-1) )   or (fromi<>konti)) then
+
+			 					if ( ((playfield[fromj,fromi].IsBlack=true) and ((fromj-kontj)<>-1)) or (abs(fromi-konti)<>0) ) or ( ((playfield[fromj,fromi].IsBlack=false) and ((fromj-kontj)<>1)) or (abs(fromi-konti)<>0) )  then
 			 					continue;
 
-			 				end;}
+			 				end;
 		 				figureTypeking: 
 		 					Begin
 			 					if (abs(fromj - kontj)>1) or (abs(fromi-konti)>1) then
 			 					Begin
 			 						continue;
 			 					end;
-		 					end;		 			
+		 					end;
+		 				FigureTypecastle:
+			 				Begin
+			 					if ((abs(fromj-kontj)<>0) and (abs(fromi-konti)<>0))  then
+
+			 					continue;
+			 				end;
+			 			FigureTypequeen:
+			 				Begin
+			 					if (abs(fromj-kontj)<>(abs(fromi-konti))) and ((abs(fromj-kontj)<>0) and (abs(fromi-konti)<>0)) then
+			 					continue;
+			 				end;
+			 			FigureTypeknight:
+			 				begin
+			 					if ((abs(fromj-kontj)<>1) and (abs(fromi-konti)<>1)) or ((abs(fromi-konti)<>2) and (abs(fromj-kontj)<>2))	then
+			 					continue;		
+			 				end;
+			 			FigureTypebishop:
+			 				begin
+			 					if (abs(fromj-kontj)<>(abs(fromi-konti))) then
+			 					continue; 
+			 				end;
 		 			end;
+		 				
+
+
+
+
+
 
 		 			if ((playfield[kontj,konti].FigureType=0) or (playfield[kontj,konti].IsBlack=noblack)) then
 		 				break;
 		 		end;
 	 		end;
-
 
 	 	end;
 
